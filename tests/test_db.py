@@ -2,7 +2,7 @@ from uuid import uuid4
 
 from sqlalchemy import select
 
-from fast_zero.models.User import User
+from fast_zero.models import User
 
 
 def test_create_user(session):
