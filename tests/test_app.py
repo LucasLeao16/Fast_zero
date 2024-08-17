@@ -30,5 +30,5 @@ def test_update_user(client):
     pass
 
 
-def test_delet_user(client):
+def test_delete_user(client):
     pass

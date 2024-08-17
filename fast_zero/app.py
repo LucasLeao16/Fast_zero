@@ -3,7 +3,7 @@ from uuid import uuid4
 
 from fastapi import FastAPI
 
-from fast_zero.entities.user import UserDB, UserList, UserPublic, UserSchema
+from fast_zero.schemas.user import UserDB, UserList, UserPublic, UserSchema
 
 app = FastAPI()
 
