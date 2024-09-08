@@ -2,14 +2,15 @@ from http import HTTPStatus
 
 from jwt import decode
 
-from fast_zero.utils.security import SECRET_KEY, create_access_token
+from fast_zero.utils.security import create_access_token, settings
 
 
 def test_jwt():
     data = {"sub": "test@test.com"}
     token = create_access_token(data)
 
-    decoded = decode(token, SECRET_KEY, algorithms=["HS256"])
+    decoded = decode(token, settings.SECRET_KEY,
+                     algorithms=[settings.ALGORITHM])
 
     assert decoded["sub"] == data["sub"]
     assert decoded["exp"]  # Testa se o valor de exp foi adicionado ao token
