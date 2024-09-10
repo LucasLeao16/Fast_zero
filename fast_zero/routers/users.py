@@ -1,18 +1,14 @@
 from http import HTTPStatus
-from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, HTTPException
 from sqlalchemy import select
-from sqlalchemy.orm import Session
 
-from fast_zero.database import get_session
 from fast_zero.models import User
 from fast_zero.schemas.user import UserList, UserPublic, UserSchema
-from fast_zero.utils.security import get_current_user, get_password_hash
+from fast_zero.types.index import T_CurrentUser, T_Session
+from fast_zero.utils.security import get_password_hash
 
 router = APIRouter(prefix="/users", tags=["users"])
-T_Session = Annotated[Session, Depends(get_session)]
-T_CurrentUser = Annotated[User, Depends(get_current_user)]
 
 
 @router.get("/", status_code=HTTPStatus.OK, response_model=UserList)
@@ -65,7 +61,8 @@ def update_user(
 ):
     if current_user.id != user_id:
         raise HTTPException(
-            status_code=HTTPStatus.FORBIDDEN, detail="Not enough permissions"
+            status_code=HTTPStatus.FORBIDDEN,
+            detail="Not enough permissions",
         )
 
     current_user.username = user.username
