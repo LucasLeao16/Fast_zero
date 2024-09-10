@@ -176,9 +176,9 @@ def test_patch_todo(session, client, user, token):
     session.commit()
 
     response = client.patch(
-        f'/todos/{todo.id}',
-        json={'title': 'Patched title'},
-        headers={'Authorization': f'Bearer {token}'},
+        f"/todos/{todo.id}",
+        json={"title": "Patched title"},
+        headers={"Authorization": f"Bearer {token}"},
     )
     assert response.status_code == HTTPStatus.OK
-    assert response.json()['title'] == 'Patched title'
+    assert response.json()["title"] == "Patched title"
